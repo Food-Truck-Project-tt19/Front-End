@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 // redux dependencies
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import logger from 'redux-logger';
+import { logger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
 // reducer function
