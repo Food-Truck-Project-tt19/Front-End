@@ -1,12 +1,20 @@
 import React from 'react';
 
+import { Switch, Route } from 'react-router-dom';
+import { PrivateRoute } from './Utils/PrivateRoute';
+
 // components
+import SignUp from './Component/SignUp';
 
 function App() {
   return (
     <div className="App">
       <h1>Food Truck Tracker</h1>
-      <SignUp />
+      <Switch>
+        <Route exact path='/sign-up' component={SignUp}/>
+      </Switch>
+      
+      
     </div>
   );
 }
