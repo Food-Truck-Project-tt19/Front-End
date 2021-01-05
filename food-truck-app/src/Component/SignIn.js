@@ -118,11 +118,29 @@ const StyledSignIn = styled.div`
 padding: 3em 5em 5em 5em;
   max-width: 100%;
   height:82vh;
+  font-family: 'Open Sans', sans-serif;
+		font-size: 13pt;
+		color: #696969;
+		font-weight: 300;
+		line-height: 2.25em;
   h1 {
     text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
   }
   .error {
       color: #F95532;
+  }
+
+  button{
+    width: 20%;
+    color: white;
+    background: #0090c5;
+    border: 0;
+    border-radius: 10%;
+    font-size: 1.5rem;
+  }
+
+  .inputs{
+
   }
 
 `
