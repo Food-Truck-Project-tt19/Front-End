@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup'
+import styled from 'styled-components'
 
 // form schema
 import { signInFormSchema } from './FormSchema/signInFormSchema';
@@ -7,6 +8,7 @@ import { signInFormSchema } from './FormSchema/signInFormSchema';
 
 // initial state
 const initialDisabled = true
+
 const initialFormValues = {
     username: "",
     password: "",
@@ -63,38 +65,34 @@ const SignIn = () => {
         });
       };
 
+  
     
-      const onSubmit = () => {
+      const onSubmit = (evt) => {
+
         
         const newUser = {
-            username: formValues.username,
-            password: formValues.password,
+          username: formValues.username,
+          password: formValues.password,
         }
-
+        
         setUsers([...users, newUser])
         setFormValues(initialFormValues)
         
+        
       }
-
-      const submit = (event) =>{
-        event.preventDefault();
-        onSubmit();
-      }
-
-   
 
     return (
-        <div className='container'>
-        <form className='form container' onSubmit={submit}>
+        <StyledSignIn>
+        <form className='form container' onSubmit={onSubmit}>
             <h3>Sign In</h3>
         <div className='form inputs'>
         <label>
-            <span>Username:</span><input
+            <span>Username: </span><input
             placeholder='enter your Username'
             name='username'
             type='text'
             onChange={inputChange}
-            />{formErrors.username}
+            /><span className='error'>{formErrors.username}</span>
         </label>
         <br/>
         <label>
@@ -103,16 +101,45 @@ const SignIn = () => {
             name='password'
             type='password'
             onChange={inputChange}
-            />{formErrors.password}
+            /><span className='error'>{formErrors.password}</span>
         </label>
         </div>
         <div className='form submit'>
            <button disabled={disabled}>Sign In</button>
         </div>
         </form>
-        </div>
+        </StyledSignIn>
     );
 
 };
+
+const StyledSignIn = styled.div`
+
+padding: 3em 5em 5em 5em;
+  max-width: 100%;
+  height:82vh;
+  h1 {
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  }
+  .inputField {
+    margin: 1rem;
+  }
+  label {
+    display: flex;
+    flex-direction: row;
+    text-align: right;
+  }
+  .textBox {
+    margin-left: 10px;
+    flex: 0 0 200px;
+  }
+  .checkBox {
+      margin-top: 8px;
+  }
+  .error {
+      color: #F95532;
+  }
+
+`
 
 export default SignIn;
