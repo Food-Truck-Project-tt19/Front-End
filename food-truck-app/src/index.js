@@ -14,6 +14,9 @@ import thunk from 'redux-thunk';
 // reducer function
 import { reducer } from './Store/Reducers';
 
+// routing
+import { BrowserRouter as Router } from 'react-router-dom';
+
 // components
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -24,9 +27,11 @@ const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 
 ReactDOM.render(
-  <Provider store={ store }>
+  <Router>
+      <Provider store={ store }>
     <App />
-  </Provider>,
+  </Provider>
+  </Router>,
   document.getElementById('root')
 );
 
