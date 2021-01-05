@@ -22,6 +22,7 @@ a{
     color: white;
     text-decoration:none;
     font-weight: 800;
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
 
 `
