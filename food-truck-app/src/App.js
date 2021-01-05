@@ -1,4 +1,6 @@
 import React from 'react';
+import SignUp from './Component/SignUp'
+import Footer from './Component/Footer'
 
 import { Switch, Route } from 'react-router-dom';
 import { PrivateRoute } from './Utils/PrivateRoute';
@@ -15,9 +17,8 @@ function App() {
         <Route exact path='/signup' component={SignUp}/>
         <Route exact path='/signin' component={SignIn}/>
       </Switch>
-      <SignIn/>
-      
-      
+      <Footer/>
+
     </div>
   );
 }
