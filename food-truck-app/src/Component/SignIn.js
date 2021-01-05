@@ -121,21 +121,6 @@ padding: 3em 5em 5em 5em;
   h1 {
     text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
   }
-  .inputField {
-    margin: 1rem;
-  }
-  label {
-    display: flex;
-    flex-direction: row;
-    text-align: right;
-  }
-  .textBox {
-    margin-left: 10px;
-    flex: 0 0 200px;
-  }
-  .checkBox {
-      margin-top: 8px;
-  }
   .error {
       color: #F95532;
   }
