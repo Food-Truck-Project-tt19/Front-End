@@ -40,7 +40,7 @@ const SignIn = () => {
 
     const inputChange = (event) => {
 
-      event.preventDefault();
+      
 
      const {name, value} = event.target;
         yup
@@ -55,7 +55,7 @@ const SignIn = () => {
           .catch((err) => {
             setFormErrors({
               ...formErrors,
-              [name]: err.errors[0],
+              [name]: err.errors,
             });
           });
     
@@ -96,7 +96,7 @@ const SignIn = () => {
         </label>
         <br/>
         <label>
-            <span>Password:</span><input
+            <span>Password: </span><input
             placeholder='enter your Password'
             name='password'
             type='password'
@@ -135,8 +135,14 @@ padding: 3em 5em 5em 5em;
     color: white;
     background: #0090c5;
     border: 0;
-    border-radius: 10%;
-    font-size: 1.5rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    transition: 0.2s;
+  }
+
+  button:hover{
+    background: #10a0d5;
   }
 
   .inputs{
