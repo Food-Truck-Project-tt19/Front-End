@@ -6,6 +6,8 @@ import { PrivateRoute } from './Utils/PrivateRoute';
 // components
 import SignUp from './Component/SignUp';
 import SignIn from './Component/SignIn';
+import NavBar from './Component/NavBar';
+import Footer from './Component/Footer'
 
 function App() {
   return (
@@ -16,7 +18,7 @@ function App() {
         <Route exact path='/signup' component={SignUp}/>
         <Route exact path='/signin' component={SignIn}/>
       </Switch>
-      <SignIn/>
+      <Footer/>
       
       
     </div>
