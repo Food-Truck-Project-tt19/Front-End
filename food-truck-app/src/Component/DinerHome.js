@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
-const DinerHome = () => {
+import { getTruckInfo } from '../Store/Actions';
+import mapStateToProps from '../Store/State';
+
+import DinerTruckCard from './DinerTruckCard';
+
+const DinerHome = (props) => {
+
+
+    // fetch trucks
+    useEffect(() => {
+        props.getTruckInfo();
+    }, []);
+
+    // event handlers
+
     return (
         <div>
-
+            <h2>List of trucks</h2>
+                {props.data.map(item => <DinerTruckCard key={item.id} {...item}/>)}
         </div>
     );
 };
 
-export default DinerHome;
+export default connect(mapStateToProps, { getTruckInfo })(DinerHome);

@@ -91,7 +91,7 @@ export const signUpOperator = operatorData => dispatch => {
 // get trucks action
 export const getTruckInfo = () => dispatch => {
     dispatch({ type: REQUEST_START });
-    axiosWithAuth().get('http://')
+    axiosWithAuth().get('https://ccorvo-foodtruck-tracker-2021.herokuapp.com/trucks/trucks')
         .then(res => {
             console.log(res);
             dispatch({ type: REQUEST_SUCCESS, payload: res.data })
