@@ -7,6 +7,7 @@ import { PrivateRoute } from './Utils/PrivateRoute';
 import SignUp from './Component/SignUp';
 import SignIn from './Component/SignIn';
 import NavBar from './Component/NavBar';
+import DinerHome from './Component/DinerHome';
 import Footer from './Component/Footer'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Switch>
         <Route exact path='/signup' component={SignUp}/>
         <Route exact path='/signin' component={SignIn}/>
+        <Route exact path='/diner/home' component={DinerHome}/>
       </Switch>
       <Footer/>
       
