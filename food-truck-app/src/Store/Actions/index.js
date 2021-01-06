@@ -34,20 +34,30 @@ export const SIGN_OUT = 'SIGN_OUT';
 // login action
 export const logIn = signInData => dispatch => {
     dispatch({ type: LOGIN_START });
-    axios.post('http://', signInData)
+    // changed to 'https'
+    axios.post('https://ccorvo-foodtruck-tracker-2021.herokuapp.com/login', `grant_type=password&username=${signInData.username}&password=${signInData.password}`, {
+            headers: {
+                Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
         .then(res => {
             console.log(res);
-            localStorage.setItem('token', res.data.token);
-            if (res.data.type === 'diner') {
-                dispatch({ type: LOGIN_SUCCESS_DINER, payload: res.data });
-            } else {
-                dispatch({ type: LOGIN_SUCCESS_OPERATOR, payload: res.data });
-            }
+            window.localStorage.setItem('token', res.data.access_token);
         })
         .catch(err => {
             console.error(err);
             dispatch({ type: LOGIN_FAIL, payload: err });
         });
+    axiosWithAuth().get('https://ccorvo-foodtruck-tracker-2021.herokuapp.com/users/getuserinfo')
+        .then(res => {
+            console.log(res);
+            if (res.data.roles[0].role.name === 'DINER') {
+                dispatch({ type: LOGIN_SUCCESS_DINER, payload: res.data });
+            } else {
+                dispatch({ type: LOGIN_SUCCESS_OPERATOR, payload: res.data });
+            }
+        })
 };
 
 // signup action diner

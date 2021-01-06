@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from 'react';
+
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { logIn } from '../Store/Actions';
+import mapStateToProps from '../Store/State';
+
 import * as yup from 'yup'
 import styled from 'styled-components'
 
@@ -7,77 +13,82 @@ import { signInFormSchema } from './FormSchema/signInFormSchema';
 
 
 // initial state
-const initialDisabled = true
+// const initialDisabled = true
 
-const initialFormValues = {
-    username: "",
-    password: "",
+// const initialFormValues = {
+//     username: "",
+//     password: "",
+// }
+// const initialFormErrors = {
+//     username: "",
+//     password: "", 
+// }
+
+const initialSignInData = {
+  username: '',
+  password: ''
 }
-const initialFormErrors = {
-    username: "",
-    password: "", 
-}
-
-const initialUsers = []
 
 
-const SignIn = () => {
+const SignIn = (props) => {
 
     // component state
-    const [disabled, setDisabled] = useState(initialDisabled)
-    const [formValues, setFormValues] = useState(initialFormValues)
-    const [formErrors, setFormErrors] = useState(initialFormErrors)
-    const [users, setUsers] = useState(initialUsers)
+    // const [disabled, setDisabled] = useState(initialDisabled)
+    // const [formValues, setFormValues] = useState(initialFormValues)
+    // const [formErrors, setFormErrors] = useState(initialFormErrors)
+    const [signInData, setSignInData] = useState(initialSignInData);
 
 
-    useEffect(()=>{
-        signInFormSchema.isValid(formValues).then((valid)=>{
-            setDisabled(!valid)
-        })
-    }, [formValues])
+    // useEffect(()=>{
+    //     signInFormSchema.isValid(formValues).then((valid)=>{
+    //         setDisabled(!valid)
+    //     })
+    // }, [formValues])
+
+    // history hook
+    const history = useHistory();
 
     // event handlers
 
     const inputChange = (event) => {
 
-      
+      setSignInData({
+        ...signInData,
+        [event.target.name]: event.target.value
+      });
 
-     const {name, value} = event.target;
-        yup
-          .reach(signInFormSchema, name) 
-          .validate(value)
-          .then(() => {
-            setFormErrors({
-              ...formErrors,
-              [name]: "",
-            });
-          })
-          .catch((err) => {
-            setFormErrors({
-              ...formErrors,
-              [name]: err.errors,
-            });
-          });
+    //  const {name, value} = event.target;
+    //     yup
+    //       .reach(signInFormSchema, name) 
+    //       .validate(value)
+    //       .then(() => {
+    //         setFormErrors({
+    //           ...formErrors,
+    //           [name]: "",
+    //         });
+    //       })
+    //       .catch((err) => {
+    //         setFormErrors({
+    //           ...formErrors,
+    //           [name]: err.errors,
+    //         });
+    //       });
     
-        setFormValues({
-          ...formValues,
-          [name]: value, 
-        });
+    //     setFormValues({
+    //       ...formValues,
+    //       [name]: value, 
+    //     });
       };
 
   
     
-      const onSubmit = (evt) => {
+      const onSubmit = (event) => {
+        event.preventDefault();
+        props.logIn(signInData);
+        
+        // setFormValues(initialFormValues)
+        
 
-        
-        const newUser = {
-          username: formValues.username,
-          password: formValues.password,
-        }
-        
-        setUsers([...users, newUser])
-        setFormValues(initialFormValues)
-        
         
       }
 
@@ -91,23 +102,27 @@ const SignIn = () => {
             placeholder='enter your Username'
             name='username'
             type='text'
+            value={signInData.username}
             onChange={inputChange}
-            /><span className='error'>{formErrors.username}</span>
+            />
         </label>
         <br/>
         <label>
             <span>Password: </span><input
             placeholder='enter your Password'
             name='password'
+            value={signInData.password}
             type='password'
             onChange={inputChange}
-            /><span className='error'>{formErrors.password}</span>
+            />
         </label>
         </div>
         <div className='form submit'>
-           <button disabled={disabled}>Sign In</button>
+           <button>Sign In</button>
         </div>
         </form>
+        {props.isLoggedIn && props.role === 'DINER' ? history.push('/diner/home') : null }
+        {props.isLoggedIn && props.role === 'TRUCKOPERATOR' ? history.push('/operator/home') : null }
         </StyledSignIn>
     );
 
@@ -151,4 +166,4 @@ padding: 3em 5em 5em 5em;
 
 `
 
-export default SignIn;
+export default connect(mapStateToProps, { logIn })(SignIn);

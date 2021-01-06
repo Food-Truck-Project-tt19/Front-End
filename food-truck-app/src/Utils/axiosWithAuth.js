@@ -1,11 +1,16 @@
-import axios from 'axios';
+import axios from 'axios'
+
 
 const axiosWithAuth = () => {
-    const token = localStorage.getItem('token');
+    const token = window.localStorage.getItem('token')
+    
     return axios.create({
-        header:{ authorization: token },
-        baseURL: 'https://localhost'
-    });
-};
+        headers:{
+            Authorization: `Bearer ${token}`
+        },
+        //fill out baseURL for auth
+        baseURL: 'https://ccorvo-foodtruck-tracker-2021.herokuapp.com'
+    })
+}
 
 export default axiosWithAuth;
