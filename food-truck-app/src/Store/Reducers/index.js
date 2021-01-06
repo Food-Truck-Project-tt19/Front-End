@@ -51,9 +51,9 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 isLoggedIn: true,
-                role: action.payload.type,
-                dinerId: action.payload.diner.dinerId,
-                username: action.payload.diner.username,
+                role: action.payload.roles[0].role.name,
+                dinerId: action.payload.userid,
+                username: action.payload.username,
                 error: ''
             }
         case LOGIN_SUCCESS_OPERATOR:
@@ -61,8 +61,9 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 isLoggedIn: true,
-                role: action.payload.operator.operatorId,
-                username: action.payload.operator.username,
+                role: action.payload.roles[0].role.name,
+                operatorId: action.payload.userid,
+                username: action.payload.username,
                 error: ''
             }
         case LOGIN_FAIL:
