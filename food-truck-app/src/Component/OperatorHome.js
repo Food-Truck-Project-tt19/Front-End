@@ -11,12 +11,26 @@ const OperatorHome = (props) => {
 
     // fetch trucks
     useEffect(() => {
-        props.getFavorites();
+
+        async function fetchData() {
+            props.getFavorites();
+          }
+          fetchData();
+        
+        
     }, []);
 
-
+    if (!props.favorites){
+        return(
+            <div>
+                <h2>Loading...</h2>
+            </div>
+        );
+    };
 
     return (
+
+
         <div>
             <h2>Operator trucks</h2>
             {props.favorites.map(item => <OperatorTruckCard key={item.id} {...item}/>)}
