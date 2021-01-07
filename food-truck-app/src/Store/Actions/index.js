@@ -59,7 +59,7 @@ export const logIn = signInData => dispatch => {
                     dispatch({ type: LOGIN_SUCCESS_OPERATOR, payload: res.data });
                 }
             })
-            
+
             .catch(err => {
                 console.log(err)
             })
@@ -160,7 +160,7 @@ export const updateTruck = (truckId, truckData) => dispatch => {
 // get favorites action
 export const getFavorites = () => dispatch => {
     dispatch({ type: GET_FAVORITES_START });
-    axiosWithAuth().get('https://ccorvo-foodtruck-tracker-2021.herokuapp.com/users/getuserinfo/')
+    axiosWithAuth().get('/users/getuserinfo/')
         .then(res => {
             console.log(res);
             dispatch({ type: GET_FAVORITES_SUCCESS, payload: res.data });
