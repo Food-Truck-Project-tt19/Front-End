@@ -9,6 +9,7 @@ import SignIn from './Component/SignIn';
 import NavBar from './Component/NavBar';
 import DinerHome from './Component/DinerHome';
 import Footer from './Component/Footer'
+import OperatorHome from './Component/OperatorHome';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exact path='/signup' component={SignUp}/>
         <Route exact path='/signin' component={SignIn}/>
         <Route exact path='/diner/home' component={DinerHome}/>
+        <Route exact path='/operator/home' component={OperatorHome}/>
       </Switch>
       <Footer/>
       

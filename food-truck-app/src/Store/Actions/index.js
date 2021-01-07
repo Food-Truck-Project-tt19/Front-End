@@ -28,6 +28,11 @@ export const UPDATE_TRUCK_START = 'UPDATE_TRUCK_START';
 export const UPDATE_TRUCK_SUCCESS = 'UPDATE_TRUCK_SUCCESS';
 export const UPDATE_TRUCK_FAIL = 'UPDATE_TRUCK_FAIL';
 export const UPDATE_TRUCK_DONE = 'UPDATE_TRUCK_DONE';
+// get favorites types
+export const GET_FAVORITES_START = 'GET_FAVORITES_START';
+export const GET_FAVORITES_SUCCESS = 'GET_FAVORITES_SUCCESS';
+export const GET_FAVORITES_FAIL = 'GET_FAVORITES_FAIL';
+
 // signout type
 export const SIGN_OUT = 'SIGN_OUT';
 
@@ -40,7 +45,8 @@ export const logIn = signInData => dispatch => {
                 Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        })
+        },
+        { timeout: 2 })
         .then(res => {
             console.log(res);
             window.localStorage.setItem('token', res.data.access_token);
@@ -145,6 +151,20 @@ export const updateTruck = (truckId, truckData) => dispatch => {
             dispatch({ type: UPDATE_TRUCK_FAIL, payload: err })
         });
 };
+
+// get favorites action
+export const getFavorites = () => dispatch => {
+    dispatch({ type: GET_FAVORITES_START });
+    axiosWithAuth().get('https://ccorvo-foodtruck-tracker-2021.herokuapp.com/users/getuserinfo/')
+        .then(res => {
+            console.log(res);
+            dispatch({ type: GET_FAVORITES_SUCCESS, payload: res.data });
+        })
+        .catch(err => {
+            console.log(err);
+            dispatch({ type: GET_FAVORITES_FAIL})
+        })
+}
 
 // sign out
 export const signOut = () => dispatch => {

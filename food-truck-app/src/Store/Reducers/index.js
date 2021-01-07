@@ -21,6 +21,9 @@ import {
     UPDATE_TRUCK_SUCCESS,
     UPDATE_TRUCK_FAIL,
     UPDATE_TRUCK_DONE,
+    GET_FAVORITES_START,
+    GET_FAVORITES_SUCCESS,
+    GET_FAVORITES_FAIL,
     SIGN_OUT
 } from '../Actions';
 
@@ -54,6 +57,7 @@ export const reducer = (state = initialState, action) => {
                 role: action.payload.roles[0].role.name,
                 dinerId: action.payload.userid,
                 username: action.payload.username,
+                truckList: action.payload.mytrucklist,
                 error: ''
             }
         case LOGIN_SUCCESS_OPERATOR:
@@ -64,6 +68,7 @@ export const reducer = (state = initialState, action) => {
                 role: action.payload.roles[0].role.name,
                 operatorId: action.payload.userid,
                 username: action.payload.username,
+                truckList: action.payload.mytrucklist,
                 error: ''
             }
         case LOGIN_FAIL:
@@ -183,6 +188,24 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoggedIn: false
+            }
+        case GET_FAVORITES_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case GET_FAVORITES_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: '',
+                favorites: action.payload.mytrucklist
+            }
+        case GET_FAVORITES_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
             }
         default:
             return state;

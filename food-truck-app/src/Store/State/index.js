@@ -4,12 +4,12 @@ const mapStateToProps = state => {
         isLoading: state.isLoading,
         addSuccess: state.addSuccess,
         role: state.role,
+        favorites: state.favorites,
         username: state.username,
         dinerId: state.dinerId,
         operatorId: state.operatorId,
         error: state.error,
         data: state.data,
-        favorites: state.favorites
     };
 };
 
