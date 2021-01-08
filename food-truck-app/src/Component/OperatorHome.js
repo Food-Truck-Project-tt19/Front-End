@@ -116,16 +116,20 @@ const StyledHome = styled.div`
 
 color: #ff4486;
 
+
 .container{
     background: #8ebccd;
     padding: 2%;
 }
 
 form{
-    color: black;
-    font-weight: 500;
+    color: white;
+    font-weight: 600;
     display: flex;
     justify-content: space-between;
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.7);
+    margin-top: 2%;
+    
 }
 
 `
