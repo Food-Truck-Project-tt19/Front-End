@@ -32,6 +32,7 @@ const StyledTruck = styled.div`
         width: 80%;
         border-radius: 20px;
         border: 4px dashed #ff4486;
+        margin-left: 5%;
     }
 
     .info{
@@ -39,7 +40,7 @@ const StyledTruck = styled.div`
         margin-top: 5%;
         display: flex;
         flex-direction: column;
-        
+
     }
     .picture{
         width: 80%;
