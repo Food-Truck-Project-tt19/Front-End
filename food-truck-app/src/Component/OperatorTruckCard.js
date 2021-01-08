@@ -28,7 +28,7 @@ const StyledTruck = styled.div`
   }
 
   img {
-    width: 80%;
+    width: 90%;
     border-radius: 20px;
     border: 4px dashed #ff4486;
     margin-left: 3%;
@@ -39,6 +39,7 @@ const StyledTruck = styled.div`
     margin-top: 5%;
     display: flex;
     flex-direction: column;
+    justify-content:space-evenly;
   }
   .picture {
     width: 80%;
