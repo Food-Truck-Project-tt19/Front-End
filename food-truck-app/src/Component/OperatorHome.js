@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components'
 
 import { getTruckInfo, getFavorites, addTruck, addFavorte } from '../Store/Actions';
 import mapStateToProps from '../Store/State';
@@ -68,9 +69,10 @@ const OperatorHome = (props) => {
     };
 
     return (
-        <div>
+        <StyledHome>
 
             <h2>New Truck</h2>
+            <div className= 'container'>
             <form onSubmit={handleSubmit}>
                 <label>
                     Truck Name: 
@@ -102,10 +104,30 @@ const OperatorHome = (props) => {
                 <button>Submit</button>
             </form>
             <br/>
+            </div>
             <h2>Food Trucks</h2>
             {props.data.map(item => <OperatorTruckCard key={item.truckid} {...item}/>)}
-        </div>
+
+        </StyledHome>
     );
 };
+
+const StyledHome = styled.div`
+
+color: #ff4486;
+
+.container{
+    background: #8ebccd;
+    padding: 2%;
+}
+
+form{
+    color: black;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+}
+
+`
 
 export default connect(mapStateToProps, { getTruckInfo, getFavorites, addTruck, addFavorte })(OperatorHome);
