@@ -7,8 +7,7 @@ import mapStateToProps from '../Store/State';
 const StyledTruck = styled.div`
     display:flex;
     border: .5px solid lightgrey;
-    flex-direction: column;
-    align-items: left;
+    flex-wrap: nowrap;
     background:#8EBCCD;
     color: white;
     padding: 1.4%;
@@ -17,18 +16,32 @@ const StyledTruck = styled.div`
     box-shadow:2px 4px 3px rgba(0, 0, 0, 0.3);
 
     p{
-        line-height: 1px;
         font-weight: 800;
+        
     }
     h2{
         line-height:2px;
         /* color: #ff4486; */
-        margin-bottom: 4%;
+        margin-bottom: 6%;
     }
     span{
         color: #ff4486;
     }
 
+    img{
+        width: 80%;
+        border-radius: 20px;
+        border: 4px dashed #ff4486;
+    }
+
+    .info{
+        width: 80%;
+        margin-top: 5%;
+    }
+    .picture{
+        width: 80%;
+        
+    }
 `
 
 
@@ -36,12 +49,17 @@ const StyledTruck = styled.div`
 const OperatorTruckCard = props => {
     return (
         <StyledTruck>
+            <div className='picture'>
+
             <h2>{props.name}</h2>
             <img src={props.imageOfTruck} alt={props.name}/>
+            </div>
+            <div className='info'>
             <p>Name: <span>{props.name}</span></p>
             <p>Cuisine: <span>{props.cuisineType}</span></p>
             <p>Current Location: <span>{props.truckLongitude} : {props.truckLatitude}</span></p>
             <p>Departure Time: <span>{props.departureTime}</span></p>
+            </div>
         </StyledTruck>
     );
 };
