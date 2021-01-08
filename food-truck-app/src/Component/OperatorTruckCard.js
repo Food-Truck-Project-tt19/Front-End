@@ -32,7 +32,7 @@ const StyledTruck = styled.div`
         width: 80%;
         border-radius: 20px;
         border: 4px dashed #ff4486;
-        margin-left: 5%;
+        margin-left: 3%;
     }
 
     .info{
