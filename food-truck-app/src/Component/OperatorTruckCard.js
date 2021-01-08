@@ -18,10 +18,15 @@ const StyledTruck = styled.div`
 
     p{
         line-height: 1px;
+        font-weight: 800;
     }
     h2{
         line-height:2px;
         /* color: #ff4486; */
+        margin-bottom: 4%;
+    }
+    span{
+        color: #ff4486;
     }
 
 `
@@ -33,10 +38,10 @@ const OperatorTruckCard = props => {
         <StyledTruck>
             <h2>{props.name}</h2>
             <img src={props.imageOfTruck} alt={props.name}/>
-            <p>Name: {props.name}</p>
-            <p>Cuisine: {props.cuisineType}</p>
-            <p>Current Location: {props.truckLongitude} : {props.truckLatitude}</p>
-            <p>Departure Time: {props.departureTime}</p>
+            <p>Name: <span>{props.name}</span></p>
+            <p>Cuisine: <span>{props.cuisineType}</span></p>
+            <p>Current Location: <span>{props.truckLongitude} : {props.truckLatitude}</span></p>
+            <p>Departure Time: <span>{props.departureTime}</span></p>
         </StyledTruck>
     );
 };
