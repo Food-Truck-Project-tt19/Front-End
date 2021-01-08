@@ -79,7 +79,7 @@ export const logIn = signInData => dispatch => {
 // signup action diner
 export const signUpDiner = dinerData => dispatch => {
     dispatch({ type: SIGNUP_START });
-    axios.post('http://', dinerData)
+    axios.post('/createnewuser/TRUCKOPERATOR', dinerData)
         .then(res => {
             console.log(res);
             dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
@@ -93,7 +93,7 @@ export const signUpDiner = dinerData => dispatch => {
 // signup action operator
 export const signUpOperator = operatorData => dispatch => {
     dispatch({ type: SIGNUP_START });
-    axios.post('http://', operatorData)
+    axios.post('/createnewuser/', operatorData)
         .then(res => {
             console.log(res);
             dispatch({ type: SIGNUP_SUCCESS, payload: res.data});
