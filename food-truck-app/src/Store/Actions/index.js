@@ -32,6 +32,11 @@ export const UPDATE_TRUCK_DONE = 'UPDATE_TRUCK_DONE';
 export const GET_FAVORITES_START = 'GET_FAVORITES_START';
 export const GET_FAVORITES_SUCCESS = 'GET_FAVORITES_SUCCESS';
 export const GET_FAVORITES_FAIL = 'GET_FAVORITES_FAIL';
+// add favorite types
+export const ADD_FAVORITES_START = 'ADD_FAVORITE_START';
+export const ADD_FAVORITES_SUCCESS = 'ADD_FAVORITE_SUCCESS';
+export const ADD_FAVORITES_FAIL = 'ADD_FAVORITE_FAIL';
+export const ADD_FAVORITES_DONE = 'ADD_FAVORITE_DONE';
 
 // signout type
 export const SIGN_OUT = 'SIGN_OUT';
@@ -59,7 +64,7 @@ export const logIn = signInData => dispatch => {
                     dispatch({ type: LOGIN_SUCCESS_OPERATOR, payload: res.data });
                 }
             })
-            
+
             .catch(err => {
                 console.log(err)
             })
@@ -102,7 +107,7 @@ export const signUpOperator = operatorData => dispatch => {
 // get trucks action
 export const getTruckInfo = () => dispatch => {
     dispatch({ type: REQUEST_START });
-    axiosWithAuth().get('https://ccorvo-foodtruck-tracker-2021.herokuapp.com/trucks/trucks')
+    axiosWithAuth().get('/trucks/trucks')
         .then(res => {
             console.log(res);
             dispatch({ type: REQUEST_SUCCESS, payload: res.data })
@@ -116,7 +121,7 @@ export const getTruckInfo = () => dispatch => {
 // add truck action
 export const addTruck = truckData => dispatch => {
     dispatch({ type: ADDTRUCK_START });
-    axiosWithAuth().post('http://', truckData)
+    axiosWithAuth().post('/trucks/truck', truckData)
         .then(res => {
             console.log(res);
             dispatch({ type: ADDTRUCK_SUCCESS, payload: res.data });
@@ -160,7 +165,7 @@ export const updateTruck = (truckId, truckData) => dispatch => {
 // get favorites action
 export const getFavorites = () => dispatch => {
     dispatch({ type: GET_FAVORITES_START });
-    axiosWithAuth().get('https://ccorvo-foodtruck-tracker-2021.herokuapp.com/users/getuserinfo/')
+    axiosWithAuth().get('/users/getuserinfo/')
         .then(res => {
             console.log(res);
             dispatch({ type: GET_FAVORITES_SUCCESS, payload: res.data });
@@ -170,6 +175,22 @@ export const getFavorites = () => dispatch => {
             dispatch({ type: GET_FAVORITES_FAIL})
         })
 }
+
+// add favorites action
+export const addFavorte = (userId, truckFavs) => dispatch => {
+    dispatch({ type: ADD_FAVORITES_START });
+    axiosWithAuth().patch(`/users/user/${userId}`, truckFavs)
+        .then(res => {
+            console.log(res);
+            dispatch({ type: ADD_FAVORITES_SUCCESS, payload: res.data });
+            dispatch({ type: ADD_FAVORITES_DONE });
+        })
+        .catch(err => {
+            console.log(err);
+            dispatch({ type: ADD_FAVORITES_FAIL })
+        });
+};
+
 
 // sign out
 export const signOut = () => dispatch => {

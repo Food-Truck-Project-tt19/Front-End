@@ -32,10 +32,11 @@ const OperatorTruckCard = props => {
     return (
         <StyledTruck>
             <h2>{props.name}</h2>
-            <img src={props.truck.imageOfTruck} alt={props.name}/>
-            <p>Cuisine: {props.truck.cuisineType}</p>
-            <p>Current Location: {props.truck.truckLongitude} : {props.truck.truckLatitude}</p>
-            <p>Departure Time: {props.truck.departureTime}</p>
+            <img src={props.imageOfTruck} alt={props.name}/>
+            <p>Name: {props.name}</p>
+            <p>Cuisine: {props.cuisineType}</p>
+            <p>Current Location: {props.truckLongitude} : {props.truckLatitude}</p>
+            <p>Departure Time: {props.departureTime}</p>
         </StyledTruck>
     );
 };

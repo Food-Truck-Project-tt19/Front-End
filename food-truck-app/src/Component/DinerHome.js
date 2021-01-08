@@ -35,6 +35,14 @@ const DinerHome = (props) => {
 
     // event handlers
 
+    if (props.isLoading){
+        return(
+            <div>
+                <h2>Loading...</h2>
+            </div>
+        );
+    };
+
     return (
         <StyledListTitle>
             <h2 id='title'>List of trucks</h2>

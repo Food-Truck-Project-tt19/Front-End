@@ -5,7 +5,7 @@ const NavBar = () => {
     return (
         <StyledNavBar>
             <div className='logo'>Food Truck Tracker</div>
-            <a href='#'>Sign out</a>
+            <a href='/signin' onClick={() => {window.localStorage.clear();}}>Sign out</a>
         </StyledNavBar>
     );
 };
