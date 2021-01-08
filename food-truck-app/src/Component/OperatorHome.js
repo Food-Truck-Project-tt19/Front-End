@@ -1,26 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { getTruckInfo } from '../Store/Actions';
-import { getFavorites } from '../Store/Actions';
+import { getTruckInfo, getFavorites, addTruck, addFavorte } from '../Store/Actions';
 import mapStateToProps from '../Store/State';
 
 import OperatorTruckCard from './OperatorTruckCard';
 
+const initialFormValues = {
+    name: '',
+    imageOfTruck: '',
+    cuisineType: '',
+    truckLongitude: '',
+    truckLatitude: '',
+    departureTime: '',
+    customerRatingAvg: ''
+}
+
 const OperatorHome = (props) => {
+
+    const [formValues, setFormValues] = useState(initialFormValues)
 
     // fetch trucks
     useEffect(() => {
-
         async function fetchData() {
-            props.getFavorites();
-          }
-          fetchData();
-        
-        
+            props.getTruckInfo();
+        }
+        fetchData();       
     }, []);
 
-    if (!props.favorites){
+    // change handler
+    const handleChange = event => {
+        setFormValues({
+            ...formValues,
+            [event.target.name]: event.target.value
+        })
+    };
+
+    // submit handler
+    const handleSubmit = event => {
+        event.preventDefault();
+
+        const newOperatorTruck = {
+            name: formValues.name,
+            imageOfTruck: formValues.imageOfTruck,
+            cuisineType: formValues.cuisineType,
+            truckLongitude: '100001',
+            truckLatitude: '100002',
+            departureTime: '12:01pm',
+            customerRatingAvg: '5.0'
+        }
+        console.log(newOperatorTruck)
+        props.addTruck(newOperatorTruck);
+        setFormValues(initialFormValues);
+        props.getTruckInfo();
+        
+        // for dealing with actual operator's truck
+        // props.getFavorites();
+
+    }
+
+    if (!props.data){
         return(
             <div>
                 <h2>Loading...</h2>
@@ -29,13 +68,44 @@ const OperatorHome = (props) => {
     };
 
     return (
-
-
         <div>
-            <h2>Operator trucks</h2>
-            {props.favorites.map(item => <OperatorTruckCard key={item.id} {...item}/>)}
+
+            <h2>New Truck</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Truck Name: 
+                    <input
+                        type='text'
+                        name='name'
+                        value={formValues.name}
+                        onChange={handleChange}
+                    />
+                </label>
+                <label>
+                    Truck Image: 
+                    <input
+                        type='text'
+                        name='imageOfTruck'
+                        value={formValues.imageOfTruck}
+                        onChange={handleChange}
+                    />
+                </label>
+                <label>
+                    Cuisine: 
+                    <input
+                        type='text'
+                        name='cuisineType'
+                        value={formValues.cuisineType}
+                        onChange={handleChange}
+                    />
+                </label>
+                <button>Submit</button>
+            </form>
+            <br/>
+            <h2>Food Trucks</h2>
+            {props.data.map(item => <OperatorTruckCard key={item.truckid} {...item}/>)}
         </div>
     );
 };
 
-export default connect(mapStateToProps, { getTruckInfo, getFavorites })(OperatorHome);
+export default connect(mapStateToProps, { getTruckInfo, getFavorites, addTruck, addFavorte })(OperatorHome);

@@ -24,6 +24,10 @@ import {
     GET_FAVORITES_START,
     GET_FAVORITES_SUCCESS,
     GET_FAVORITES_FAIL,
+    ADD_FAVORITES_START,
+    ADD_FAVORITES_SUCCESS,
+    ADD_FAVORITES_FAIL,
+    ADD_FAVORITES_DONE,
     SIGN_OUT
 } from '../Actions';
 
@@ -206,6 +210,31 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 error: action.payload
+            }
+        case ADD_FAVORITES_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case ADD_FAVORITES_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                addSuccess: true,
+                error: ''
+            }
+        case ADD_FAVORITES_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case ADD_FAVORITES_DONE:
+            return {
+                ...state,
+                isLoading: false,
+                addSuccess: false,
+                error: ''
             }
         default:
             return state;
