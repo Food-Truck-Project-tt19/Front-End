@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <NavBar/>
-      <h1>Food Truck Tracker</h1>
+      {/* <h1>Food Truck Tracker</h1> */}
       <Switch>
         <Route exact path='/signup' component={SignUp}/>
         <Route exact path='/signin' component={SignIn}/>

@@ -11,7 +11,7 @@ const FooterBar = styled.div`
     line-height:5px;
     padding: 1.4%;
     text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
-
+    margin-top: 2.7%;
 `
 
 const Footer = () => {
